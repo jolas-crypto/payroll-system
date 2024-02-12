@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -12,54 +13,45 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.login');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Log out the user from application.
+     *
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function create()
+    public function authenticate(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard.index')
+                ->withSuccess('You have successfully logged in!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Your provided credentials do not match in our records.',
+        ])->onlyInput('email');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Log out the user from application.
+     *
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function logout(Request $request)
     {
-        //
-    }
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('login')
+            ->withSuccess('You have logged out successfully!');
     }
 }
