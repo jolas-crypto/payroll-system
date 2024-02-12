@@ -9,8 +9,11 @@
     @stack('scripts')
 </head>
 <body>
-    <div id="app">
-        @yield('content')
+    <div id="app" class="bg-gray-100">
+        @include('includes.header')
+        <div>
+            @yield('content')
+        </div>
     </div>
 </body>
 </html>
