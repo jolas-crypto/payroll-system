@@ -9,7 +9,7 @@
     @stack('scripts')
 </head>
 <body>
-    <div id="app" class="bg-gray-100">
+    <div id="app" class="bg-white">
         @include('includes.header')
         <div>
             @yield('content')
