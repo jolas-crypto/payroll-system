@@ -4,17 +4,15 @@
 
 @layer components {
     .nav-module {
-        @apply
-        flex 
-        border-b-2 
-        border-transparent 
-        hover:border-blue-300 
-        transition  
-        duration-150 
-        px-4 
-        pb-3 
-        hover:bg-gray-300 
-        hover:rounded-t-md 
-        hover:text-white
+        @apply flex py-1 px-2 hover:bg-gray-200 hover:rounded-md
+    }
+    .sidebar-header {
+        @apply flex py-1 px-4 border-transparent bg-gray-50 rounded-md hover:bg-gray-100
+    }
+    .sidebar-sub-header {
+        @apply flex py-1 px-4 border-transparent hover:bg-gray-100 hover:rounded-md text-sm font-normal
+    }
+    .active-nav {
+        @apply border-b-2 border-transparent border-blue-400
     }
 }
