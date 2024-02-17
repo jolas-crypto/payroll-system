@@ -12,7 +12,13 @@
     .sidebar-sub-header {
         @apply flex py-1 px-4 border-transparent hover:bg-gray-100 hover:rounded-md text-sm font-normal
     }
+    .sidebar-sub-header-active {
+        @apply border-l-4 border-blue-400 flex py-1 px-3 bg-gray-100 rounded-r-md text-sm font-normal items-center space-x-1
+    }
     .active-nav {
         @apply border-b-2 border-transparent border-blue-400
+    }
+    .header-content {
+        @apply border-b border-b-gray-300 py-2
     }
 }
