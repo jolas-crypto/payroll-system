@@ -17,15 +17,17 @@
         <li class="font-normal">
             <a href="{{ route('dashboard.index') }}" class="nav-module items-center {{ request()->is('dashboard') ? 'active-nav' : '' }}">
                 <div class="flex items-center space-x-1">
-                    <img src="/images/icons/dashboard-5-svgrepo-com.svg" alt="Dashboard" srcset="" class="h-4">
+                    <img src="/images/icons/dashboard-alt-svgrepo-com.svg" alt="Dashboard" srcset="" class="h-4">
                     <span>Dashboard</span>
                 </div>
             </a>
         </li>
         <li class="font-normal">
-            <a href="{{ route('payroll-dashboard.index') }}" class="nav-module items-center {{ request()->is('payroll-dashboard') ? 'active-nav' : '' }}">
+            <a
+            href="{{ route('payroll-dashboard.index') }}" 
+            class="nav-module items-center {{ request()->is('payroll-dashboard') || request()->is('premium') ? 'active-nav' : '' }}">
                 <div class="flex items-center space-x-1">
-                    <img src="/images/icons/simpl-pay-svgrepo-com.svg" alt="Payroll" srcset="" class="h-4">
+                    <img src="/images/icons/pay-svgrepo-com.svg" alt="Payroll" srcset="" class="h-4">
                     <span>Payroll</span>
                 </div>
             </a>
@@ -33,7 +35,7 @@
         <li class="font-normal">
             <a href="" class="nav-module items-center">
                 <div class="flex items-center space-x-1">
-                    <img src="/images/icons/settings-svgrepo-com.svg" alt="Setting" srcset="" class="h-4">
+                    <img src="/images/icons/setting-two-svgrepo-com.svg" alt="Setting" srcset="" class="h-4">
                     <span>Settings</span>
                 </div>
             </a>
