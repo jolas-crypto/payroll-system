@@ -1,4 +1,4 @@
-<div class="w-2/5 py-2 space-y-2">
+<div class="w-1/4 py-2 space-y-2">
     <nav class="flex flex-col space-y-2 h-1/3 mr-6">
         <div class="border-b border-b-gray-300 py-2">
             <div class="sidebar-header items-center space-x-1">

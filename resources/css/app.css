@@ -21,4 +21,13 @@
     .header-content {
         @apply border-b border-b-gray-300 py-2
     }
+    .header-content-table-header {
+        @apply text-xs text-gray-500 px-1 font-extrabold text-left py-2
+    }
+    .content-action-button {
+        @apply py-1 px-1.5 flex items-center text-sm font-normal hover:bg-gray-300 hover:rounded-md bg-gray-100 rounded-md space-x-1
+    }
+    .body-content-with-border {
+        @apply border border-gray-100 p-2 border-l-blue-300 border-l-4 rounded-md
+    }
 }

@@ -46,7 +46,7 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('post.index')
+        return redirect()->route('dashboard.index')
         ->withSuccess('You have successfully registered & logged in!');
     }
 

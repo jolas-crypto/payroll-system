@@ -18,4 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('payroll-dashboard', PayrollController::class);
     Route::resource('premium', PremiumController::class);
+
+    Route::post('/premium-sss/list', [PremiumController::class, 'list'])->name('premium-sss-list');
 });

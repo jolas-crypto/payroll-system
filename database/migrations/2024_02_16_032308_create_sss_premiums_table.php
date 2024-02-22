@@ -25,13 +25,14 @@ return new class extends Migration
             $table->decimal('employer_compensation', 15, 2)->nullable();
             $table->decimal('employee_compensation', 15, 2)->nullable();
             $table->decimal('total_compensation', 15, 2)->nullable();
-            $table->decimal('mpf_employer', 15, 2)->nullable();
-            $table->decimal('mpf_employee', 15, 2)->nullable();
-            $table->decimal('total_mpf', 15, 2)->nullable();
+            $table->decimal('mpf_employer', 15, 2)->nullable()->comment('Mandatory Provident Fund for Employer');
+            $table->decimal('mpf_employee', 15, 2)->nullable()->comment('Mandatory Provident Fund for Employee');
+            $table->decimal('total_mpf', 15, 2)->nullable()->comment('Mandatory Provident Fund Total');
             $table->decimal('total_employer', 15, 2)->nullable();
             $table->decimal('total_employee', 15, 2)->nullable();
             $table->decimal('total_overall', 15, 2)->nullable();
             $table->unsignedBigInteger('created_by')->default(0);
+            $table->unsignedBigInteger('updated_by')->default(0);
             $table->timestamps();
         });
     }
