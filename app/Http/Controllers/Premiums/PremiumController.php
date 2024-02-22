@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Premiums;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Premium\SSSPremiumResource;
+use App\Http\Services\Lists\DataTableListFilter;
+use App\Http\Services\Lists\SSSList;
+use App\Models\SSSPremium;
 use Illuminate\Http\Request;
 
 class PremiumController extends Controller
@@ -12,7 +16,11 @@ class PremiumController extends Controller
      */
     public function index()
     {
-        return view('pages.payrolls.premiums.index');
+        $data = [
+            'tableHeader' => SSSList::COLUMNS
+        ];
+
+        return view('pages.payrolls.premiums.index', compact('data'));
     }
 
     /**
@@ -61,5 +69,19 @@ class PremiumController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * List of the resource with using Interface of Process
+     */
+    public function list(Request $request)
+    {
+        $queries = $request->queries ?? '';
+        $columns = SSSList::COLUMNS;
+        $sssPremiumList = (new SSSList())->process($columns, $queries);
+
+        $paginationResources = DataTableListFilter::paginateData($sssPremiumList, $request);
+
+        return SSSPremiumResource::collection($paginationResources);
     }
 }

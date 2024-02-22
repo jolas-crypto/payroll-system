@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pb-2">
         <nav class="header-content">
             <button
                 v-for="(tab, index) in tabs"

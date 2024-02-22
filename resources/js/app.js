@@ -1,5 +1,5 @@
-import HeaderBodyContent from "./layouts/header-body-content.vue";
-import PagePremiumSSSList from "./pages/premiums/sss-list.vue";
+import HeaderBodyContent from "./layouts/HeaderBodyContent.vue";
+import PagePremiumSSSList from "./pages/Premiums/SSSList.vue";
 
 import { createApp } from "vue";
 
