@@ -1,6 +1,7 @@
 <template>
     <div class="body-content-with-border">
         <data-table-list
+        ref="sssPremiumTable"
         :url="props.url_sss"
         :table_header="props.table_header_sss"
         :default_sort_direction="props.default_sort_direction"
@@ -8,6 +9,11 @@
         :show_entries="props.show_entries"
         :filter="state.filter"
         >
+        <template v-slot:filters>
+            <select name="year" id="year" v-model="state.filter.year.value" @change="changeYear">
+                <option v-for="year in props.year_list" :key="year" :value="year">{{ year }}</option>
+            </select>
+        </template>
         <template v-slot:actions="item">
             <div class="flex space-x-1">
                 <button
@@ -26,7 +32,11 @@
         </template>
         </data-table-list>
     </div>
-    <edit-modal v-if="isEditingRow" @cancel="closeModalCancel"></edit-modal>
+    <edit-modal 
+    v-if="isEditingRow" 
+    :edited-row="editedRowItem"
+    @cancel="closeModalCancel">
+    </edit-modal>
 </template>
 
 <script setup>
@@ -41,14 +51,16 @@
         default_sort_direction: String,
         default_sort_field: String,
         show_entries: Array,
+        year_list: Array,
     })
 
     const isEditingRow = ref(false);
     const editedRowItem = ref({});
+    const sssPremiumTable = ref();
 
     const state = reactive({
         filter: {
-            year: { value: '', operator: '%' },
+            year: { value: '', operator: '=' },
         },
     })
 
@@ -60,6 +72,10 @@
 
     const closeModalCancel = () => {
         isEditingRow.value = false
+    }
+
+    const changeYear = () => {
+        sssPremiumTable.value.withFilter()
     }
 
 </script>

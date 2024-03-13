@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Premiums;
 
+use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Premium\SSSPremiumResource;
 use App\Http\Services\Lists\DataTableListFilter;
@@ -17,7 +18,8 @@ class PremiumController extends Controller
     public function index()
     {
         $data = [
-            'tableHeader' => SSSList::COLUMNS
+            'tableHeader' => SSSList::COLUMNS,
+            'yearList' => DateHelper::getLessThanCurrentDate(config('constant.START_YEAR'))
         ];
 
         return view('pages.payrolls.premiums.index', compact('data'));
@@ -79,8 +81,7 @@ class PremiumController extends Controller
         $queries = $request->queries ?? '';
         $columns = SSSList::COLUMNS;
         $sssPremiumList = (new SSSList())->process($columns, $queries);
-
-        $paginationResources = DataTableListFilter::paginateData($sssPremiumList, $request);
+        $paginationResources = DataTableListFilter::getAllData($sssPremiumList);
 
         return SSSPremiumResource::collection($paginationResources);
     }

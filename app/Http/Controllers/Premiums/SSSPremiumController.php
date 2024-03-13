@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Premiums;
 use App\Http\Controllers\Controller;
 use App\Models\SSSPremium;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SSSPremiumController extends Controller
 {
@@ -35,7 +36,7 @@ class SSSPremiumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SSSPremium $sSSPremium)
+    public function show(SSSPremium $sssPremium)
     {
         //
     }
@@ -43,7 +44,7 @@ class SSSPremiumController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SSSPremium $sSSPremium)
+    public function edit(SSSPremium $sssPremium)
     {
         //
     }
@@ -51,15 +52,17 @@ class SSSPremiumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SSSPremium $sSSPremium)
+    public function update(Request $request, SSSPremium $sssPremium)
     {
-        //
+        $sssPremium->update($request->all());
+
+        return response()->json(['message' => 'SSS Premium updated successfully'], Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SSSPremium $sSSPremium)
+    public function destroy(SSSPremium $sssPremium)
     {
         //
     }

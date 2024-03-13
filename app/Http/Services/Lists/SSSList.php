@@ -11,53 +11,47 @@ class SSSList extends DataTableListFilter implements InterfaceList
 {
     const COLUMNS = [
         [
+            'field' => 'id',
+            'label' => 'No.',
+            'has_counter' => true,
+        ],
+        [
             'field' => 'year',
             'label' => 'Year',
-            'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.year'
+            'searchable' => true,
+            'searchable_field' => 'year',
         ],
         [
             'field' => 'salary_from',
             'label' => 'Salary From',
             'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.salary_from'
         ],
         [
             'field' => 'salary_to',
             'label' => 'Salary To',
             'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.salary_to'
         ],
         [
             'field' => 'regular_salary_credit',
             'label' => 'Regular Salary Credit',
             'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.regular_salary_credit'
         ],
         [
             'field' => 'mpf_salary_credit',
             'label' => 'MPF Salary Credit',
             'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.mpf_salary_credit'
         ],
         [
             'field' => 'total_salary_credit',
             'label' => 'Total Salary Credit',
             'sortable' => false,
-            'searchable' => false,
-            'searchable_field' > 'sss_premiums.total_salary_credit'
         ],
         [
             'field' => 'actions',
             'label' => 'Actions',
             'has_slot' => true,
         ],
-
+        
     ];
 
     public function process($columns, $queries)

@@ -11,12 +11,5 @@ class SSSPremium extends Model
 
     protected $table = 'sss_premiums';
 
-    // protected $fillable = [
-    //     'year',
-    //     'salary_from',
-    //     'salary_to',
-    //     'regular_salary_credit',
-    //     'mpf_salary_credit',
-    //     'total_salary_credit'
-    // ];
+    protected $guarded = [];
 }

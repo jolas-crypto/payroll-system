@@ -1,4 +1,5 @@
 <template>
+    <slot name="filters"></slot>
     <div class="flex justify-center items-center space-x-4 text-sm text-gray-700 max-h-screen" v-if="loading">
         <svg class="animate-spin h-12 w-12 text-gray-600 absolute top-36" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24">
@@ -27,11 +28,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in tableBody.data" :key="index" class="transition duration-300 ease-in-out hover:bg-gray-100">
+                <tr v-for="(item, indexItem) in tableBody.data" :key="indexItem" class="transition duration-300 ease-in-out hover:bg-gray-100">
                     <template v-for="(column, index) in tableHeader" :key="index">
                         <td class="px-1 py-2 whitespace-nowrap text-sm text-gray-900">
                             <p v-if="typeof column.has_slot !== 'undefined' || column?.has_slot == 'false'">
                                 <slot :item="item" :name="column.field"></slot>
+                            </p>
+                            <p v-else-if="typeof column.has_counter !== 'undefined' || column?.has_counter == 'true'">
+                                {{ indexItem + 1 }}
                             </p>
                             <p v-else>
                                 {{ item[column.field] }}
@@ -42,16 +46,6 @@
             </tbody>
         </table>
     </div>
-    <!-- <div class="flex justify-end text-xs items-center space-x-2 pt-2" v-if="tableBody">
-        <div class="flex space-x-1 items-center">
-            <label class="text-sm">Show</label>
-            <select id="per_page" v-model="pagination" class="text-sm px-2 border border-gray-200 rounded" name="per_page">
-                <option v-for="(entry, index) in showEntries" :key="index" :value="entry">{{ entry }}</option>
-            </select>
-            <span class="text-sm font-normal">entries</span>
-        </div>
-        <span class="font-bold items-center flex" v-if="tableBody.meta">{{tableBody.meta?.total}} item/s</span>
-    </div> -->
 </template>
 
 <script setup>
@@ -72,20 +66,24 @@
     const tableBody = ref([]);
     const pagination = ref(props.show_entries_default);
     const sortDirection = ref(props.default_sort_direction);
-    const showEntries = ref(props.show_entries);
     const sortField = ref(props.default_sort_field);
-    const search = ref(props.filter);
+    const search = ref("");
     const loading = ref(false);
 
     onMounted(() => {
-        getDataManagement()
+        getData()
     });
 
     watch(pagination, () => {
-        getDataManagement()
+        getData()
     });
 
-    const getDataManagement = (page = 1) => {
+    const withFilter = () => {
+        search.value = props.filter
+        getData()
+    }
+
+    const getData = (page = 1) => {
         loading.value = true
 
         const params = {
@@ -98,6 +96,7 @@
 
         axios.post(props.url, params)
         .then((response) => {
+            console.log(response.data)
             tableBody.value = response.data
         }).catch((error) => {
 
@@ -107,6 +106,7 @@
     }
 
     defineExpose({
-        getDataManagement
+        getData,
+        withFilter
     })
 </script>
