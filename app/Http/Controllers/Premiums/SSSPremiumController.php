@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Premiums;
 
+use App\Helpers\PremiumsSssHelper;
 use App\Http\Controllers\Controller;
 use App\Models\SSSPremium;
 use Illuminate\Http\Request;
@@ -9,6 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SSSPremiumController extends Controller
 {
+    private $premiumSSS;
+
+    public function __construct(PremiumsSssHelper $premiumsSssHelper)
+    {
+        $this->premiumSSS = $premiumsSssHelper;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +38,12 @@ class SSSPremiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $premiums = $this->premiumSSS->storeCustom($request);
+
+        return response()->json([
+            'data' => $premiums,
+            'message' => 'Post was successfully added.'
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -64,6 +77,8 @@ class SSSPremiumController extends Controller
      */
     public function destroy(SSSPremium $sssPremium)
     {
-        //
+        $sssPremium->delete();
+
+        return response()->json(['message' => 'Successfully Deleted!'], Response::HTTP_OK);
     }
 }
