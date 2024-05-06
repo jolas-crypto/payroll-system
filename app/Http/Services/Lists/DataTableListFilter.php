@@ -10,18 +10,16 @@ class DataTableListFilter
     {
         /** filter wildcard only filters */
         $wildCardFilters = collect($queries)->filter(function ($query) {
-            return !empty($query['value']) && $query['operator'] === '%';
+            return !empty($query['value']);
         });
 
         if ($wildCardFilters->isNotEmpty()) {
             $data->where(function ($query) use ($columns, $wildCardFilters) {
                 foreach ($columns as $key => $column) {
-                    #only set searchable can be searched
                     if (empty($column['searchable'])) {
                         continue;
                     }
-                    #loop all through the wildcard searching
-                    #accepting array and string
+
                     foreach ($wildCardFilters as $wildCardFilter) {
                         $keyword = $wildCardFilter['value'];
                         $searchableField = $column['searchable_field'];
@@ -38,9 +36,13 @@ class DataTableListFilter
         return $data;
     }
 
-    /** paginate and sort data */
     public static function paginateData($query, $request)
     {
-        return $query->orderBy($request->sort_field, $request->sort_direction)->paginate($request->paginate);
+        return $query->paginate($request->paginate);
+    }
+
+    public static function getAllData($query)
+    {
+        return $query->get();
     }
 }

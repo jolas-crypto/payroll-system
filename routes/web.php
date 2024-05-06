@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\Premiums\PremiumController;
+use App\Http\Controllers\Premiums\SSSPremiumController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function  () {
@@ -20,4 +21,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('premium', PremiumController::class);
 
     Route::post('/premium-sss/list', [PremiumController::class, 'list'])->name('premium-sss-list');
+    Route::resource('sss-premiums', SSSPremiumController::class);
 });
