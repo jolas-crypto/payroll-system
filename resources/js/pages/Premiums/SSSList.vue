@@ -11,17 +11,27 @@
         <button
         type="button" 
         class="content-action-button" 
-        title="Export Details">
+        title="Export Details"
+        @click="exportPremium">
             <img src="/images/icons/export-content-svgrepo-com.svg" class="h-4">
             <span>Export</span>
         </button>
-        <button
-        type="button" 
-        class="content-action-button" 
-        title="Import Details">
+        <div class="">
+            <input
+            type="file"
+            ref="fileInput"
+            @change="handleFileUpload"
+            accept=".csv"
+            class="hidden"
+            />
+            <button
+            @click="triggerFileUpload"
+            class="content-action-button"
+            >
             <img src="/images/icons/import-content-svgrepo-com.svg" class="h-4">
-            <span>import</span>
-        </button>
+            <span>Import</span>
+            </button>
+        </div>
     </div>
     <div class="body-content-with-border">
         <data-table-list
@@ -78,6 +88,7 @@
     @cancel="closeModalCancel"
     >
     </add-modal>
+    <processing :show="isProcessing"></processing>
 </template>
 
 <script setup>
@@ -86,6 +97,8 @@
     import EditModal from '@/components/EditModal.vue';
     import AddModal from '@/components/AddModal.vue';
     import http_request from '../../http_request';
+    import axios from 'axios';
+    import Processing from '@/components/Processing.vue'
 
     const props = defineProps({
         url_sss: String,
@@ -101,9 +114,14 @@
     const isAddingRow = ref(false);
     const editedRowItem = ref({});
     const sssPremiumTable = ref();
+    const currentYear = ref();
+    const selectedFile = ref(null);
+    const fileInput = ref(null);
+    const isProcessing = ref(false);
 
     onMounted(() => {
         state.filter.year.value = getCurrentYear();
+        currentYear.value = getCurrentYear();
     })
 
     const getCurrentYear = () => {
@@ -134,6 +152,35 @@
         editedRowItem.value = items.item
     }
 
+    const handleFileUpload = (event) => {
+        selectedFile.value = event.target.files[0];
+        importFile();
+    };
+
+    const triggerFileUpload = () => {
+        fileInput.value.click();
+    };
+
+    const importFile = async () => {
+        if (!selectedFile.value) return;
+
+        const formData = new FormData();
+        formData.append('file', selectedFile.value);
+
+        try {
+            const response = await axios.post('/import-sss-premiums', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            });
+
+            alert(response.data.message);
+            location.reload()
+        } catch (error) {
+            alert('An error occurred while importing the file.');
+        }
+    };
+
     const deleteRowInformation = async (item) => {
         let id = item.item.id
         let confirmation = confirm('Are you sure, you want to delete this record?')
@@ -145,12 +192,38 @@
                 alert(response.data.message)
                 location.reload()
             } else {
-                // data.errors = response.data
             }
         }
     }
 
     const insertRowInformation = () => {
+        
+    }
+
+    const exportPremium = () => {
+        isProcessing.value = true;
+
+        try {
+            axios.get('/export-sss-premiums', {
+                responseType: 'blob',
+                timeout:0
+            })
+            .then(response => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `SSSPremiumsTable_${currentYear.value}.csv`);
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        } catch (error) {
+            
+        } finally {
+            isProcessing.value = false;
+        }
         
     }
 

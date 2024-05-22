@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('sss_premiums', function (Blueprint $table) {
             $table->id();
+            $table->integer('company_id')->index()->nullable();
+            $table->integer('reported_id')->index()->nullable();
             $table->year('year')->index();
             $table->decimal('salary_from', 15, 2)->nullable();
             $table->decimal('salary_to', 15, 2)->nullable();

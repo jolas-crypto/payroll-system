@@ -13,8 +13,11 @@
                 $showEntries = 10;
                 $defaultSortDirection = "desc";
                 $defaultSortField = "year";
+                $urlPagIbig=route('pag-ibig.index');
             @endphp
-            <header-body-content></header-body-content>
+            <header-body-content
+            :url_pag_ibig="{{ json_encode($urlPagIbig) }}"
+            ></header-body-content>
             <page-premiums-sss-list
             :url_sss="{{ json_encode($urlSSS) }}"
             :table_header_sss="{{ json_encode($data['tableHeader']) }}"
