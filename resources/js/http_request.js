@@ -66,5 +66,27 @@ export default {
             returnResponse.data = error.response.data.errors
             return returnResponse
         }
-    }
+    },
+
+    // async postImport(method, url, payload, header) {
+    //     let returnResponse = {
+    //         status: HTTP_OK,
+    //         success: true,
+    //         data: {}
+    //     }
+
+    //     try {
+    //         const response = await axios({
+    //             method, url, file: payload, header
+    //         })
+    //         returnResponse.data = response.data
+    //         returnResponse.success
+    //         return returnResponse
+    //     } catch (error) {
+    //         returnResponse.success = false
+    //         returnResponse.status = error.response
+    //         returnResponse.data = error.response.data.errors
+    //         return returnResponse
+    //     }
+    // }
 }
