@@ -55,7 +55,7 @@
                 class="content-action-button" 
                 title="Edit Details"
                 @click="editRowInformation(item)">
-                    <img src="/images/icons/edit-svgrepo-com_gray.svg" class="h-4">
+                    <img src="/images/icons/edit-svgrepo-com.svg" class="h-4">
                     <span>Edit</span>
                 </button>
                 <button 
@@ -66,14 +66,14 @@
                     <img src="/images/icons/delete-svgrepo-com_gray.svg" class="h-4">
                     <span>Delete</span>
                 </button>
-                <button 
+                <!-- <button 
                 type="button" 
                 class="content-action-button" 
                 title="Insert Details Below"
                 @click="insertRowInformation()">
                     <img src="/images/icons/insert-below-svgrepo-com.svg" class="h-4">
                     <span>Insert</span>
-                </button>
+                </button> -->
             </div>
         </template>
         </data-table-list>
@@ -81,6 +81,8 @@
     <edit-modal 
     v-if="isEditingRow" 
     :edited-row="editedRowItem"
+    :premium-type="'sss'"
+    :premium-url="'sss-premiums'"
     @cancel="closeModalCancel">
     </edit-modal>
     <add-modal

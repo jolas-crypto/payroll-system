@@ -14,9 +14,13 @@
                 $defaultSortDirection = "desc";
                 $defaultSortField = "year";
                 $urlPagIbig=route('pag-ibig.index');
+                $urlPremium=route('premium.index');
+                $urlPhilHealth=route('phil-health.index');
             @endphp
             <header-body-content
             :url_pag_ibig="{{ json_encode($urlPagIbig) }}"
+            :url_premium="{{ json_encode($urlPremium) }}"
+            :url_phil_health="{{ json_encode($urlPhilHealth) }}"
             ></header-body-content>
             <page-premiums-sss-list
             :url_sss="{{ json_encode($urlSSS) }}"

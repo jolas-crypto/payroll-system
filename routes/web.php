@@ -7,6 +7,7 @@ use App\Http\Controllers\Payroll\PayrollController;
 use App\Http\Controllers\Premiums\ExportSssPremiumController;
 use App\Http\Controllers\Premiums\ImportSssPremiumController;
 use App\Http\Controllers\Premiums\PagibigController;
+use App\Http\Controllers\Premiums\PhilHealthController;
 use App\Http\Controllers\Premiums\PremiumController;
 use App\Http\Controllers\Premiums\SSSPremiumController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/import-sss-premiums', [ImportSssPremiumController::class, 'import']);
 
     Route::resource('pag-ibig', PagibigController::class);
+
+    Route::resource('phil-health', PhilHealthController::class);
+    Route::post('/premium-philhealth/list', [PhilHealthController::class, 'list'])->name('premium-philhealth-list');
 });

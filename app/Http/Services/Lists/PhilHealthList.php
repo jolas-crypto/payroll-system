@@ -3,9 +3,9 @@
 namespace App\Http\Services\Lists;
 
 use App\Http\Services\Interfaces\InterfaceList;
-use App\Models\SSSPremium;
+use App\Models\PhilHealthPremium;
 
-class SSSList extends DataTableListFilter implements InterfaceList
+class PhilHealthList extends DataTableListFilter implements InterfaceList
 {
     const COLUMNS = [
         [
@@ -30,32 +30,36 @@ class SSSList extends DataTableListFilter implements InterfaceList
             'sortable' => false,
         ],
         [
-            'field' => 'regular_salary_credit',
-            'label' => 'Regular Salary Credit',
+            'field' => 'employee_share',
+            'label' => 'Employee Share',
             'sortable' => false,
         ],
         [
-            'field' => 'mpf_salary_credit',
-            'label' => 'MPF Salary Credit',
+            'field' => 'employer_share',
+            'label' => 'Employer Share',
             'sortable' => false,
         ],
         [
-            'field' => 'total_salary_credit',
-            'label' => 'Total Salary Credit',
+            'field' => 'total_ee_er_share',
+            'label' => 'Total EE ER Share',
+            'sortable' => false,
+        ],
+        [
+            'field' => 'salary_credit',
+            'label' => 'Salary Credit',
             'sortable' => false,
         ],
         [
             'field' => 'actions',
             'label' => 'Actions',
             'has_slot' => true,
-        ],
-        
+        ], 
     ];
 
-    public function process($columns, $queries)
+    public function process($column, $queries)
     {
-        $sssPremiums = SSSPremium::query();
-        $data = $this->wildCardFilter($sssPremiums, $queries, $columns);
+        $pagIbigPremium = PhilHealthPremium::query();
+        $data = $this->wildCardFilter($pagIbigPremium, $queries, $column);
 
         return $data;
     }

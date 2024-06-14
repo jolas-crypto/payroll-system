@@ -2,6 +2,7 @@ import axios from "axios"
 import { HTTP_OK } from "./constant"
 
 export default {
+
     async save(method, url, payload) {
         let returnResponse = {
             status: HTTP_OK,
@@ -24,7 +25,7 @@ export default {
         }
     },
 
-    async update(method, url, payload) {
+    async update(url, payload) {
         let returnResponse = {
             status: HTTP_OK,
             success: true,
@@ -32,9 +33,7 @@ export default {
         }
 
         try {
-            const response = await axios({
-                method, url, data: payload
-            })
+            const response = await axios.put(url, payload)
             returnResponse.data = response.data
             returnResponse.success
             return returnResponse

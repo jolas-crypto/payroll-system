@@ -96,7 +96,7 @@
 
         axios.post(props.url, params)
         .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             tableBody.value = response.data
         }).catch((error) => {
 

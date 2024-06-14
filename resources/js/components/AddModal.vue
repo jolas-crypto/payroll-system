@@ -262,7 +262,7 @@
 </template>
 
 <script setup>
-    import { defineEmits, ref, reactive, onMounted } from 'vue';
+    import { defineEmits, reactive, onMounted } from 'vue';
     import http_request from '../http_request';
     import { 
         getListCurrentDateWithLessThan, 

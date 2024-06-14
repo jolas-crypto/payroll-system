@@ -36,4 +36,10 @@
     .button-save {
         @apply bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg
     }
+    .pagibig-label {
+        @apply text-sm flex justify-end
+    }
+    .pagibig-text-input {
+        @apply block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+    }
 }
