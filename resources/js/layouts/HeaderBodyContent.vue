@@ -23,8 +23,9 @@
 </template>
 
 <script setup>
-    import { ref, defineProps } from 'vue';
+    import { ref, defineProps, onMounted } from 'vue';
     import axios from 'axios';
+    import { getCurrentURL } from '../helpers';
 
     const activeTab = ref('SSS');
     const tabs = ref([
@@ -34,13 +35,10 @@
     ]);
 
     const props = defineProps({
-        url_pag_ibig: String
+        url_pag_ibig: String,
+        url_premium: String,
+        url_phil_health: String,
     })
-
-    const setActiveTab = (tab, event) => {
-        event.preventDefault();
-        activeTab.value = tab;
-    };
 
     const getTabButtonClasses = (tab) => {
         return [
@@ -52,9 +50,20 @@
     }
 
     const changeTab = async (tab) => {
-        activeTab.value = tab
         const urlTab = tab.toLowerCase()
-        console.log(urlTab)
-        window.location.href = props.url_pag_ibig
-    };
+
+        if (urlTab == 'sss') {
+            window.location.href = props.url_premium
+        } else if (urlTab == 'pag-ibig') {
+            window.location.href = props.url_pag_ibig
+        } else {
+            window.location.href = props.url_phil_health
+        }
+    }
+
+    onMounted(() => {
+        const currentURL = getCurrentURL(window.location.pathname)
+
+        activeTab.value = currentURL.value
+    })
 </script>

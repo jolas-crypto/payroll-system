@@ -25,7 +25,7 @@
         <li class="font-normal">
             <a
             href="{{ route('payroll-dashboard.index') }}" 
-            class="nav-module items-center {{ request()->is('payroll-dashboard') || request()->is('premium') ? 'active-nav' : '' }}">
+            class="nav-module items-center {{ request()->is('payroll-dashboard') || request()->is('premium') || request()->is('pag-ibig') || request()->is('phil-health') ? 'active-nav' : '' }}">
                 <div class="flex items-center space-x-1">
                     <img src="/images/icons/pay-svgrepo-com.svg" alt="Payroll" srcset="" class="h-4">
                     <span>Payroll</span>

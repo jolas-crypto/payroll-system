@@ -26,7 +26,7 @@
             <a href="" class="sidebar-sub-header">Edit Browser Type</a>
             <a href="" class="sidebar-sub-header">Salary Table Bracket Premiums</a>
             <a href="{{ route('premium.index') }}"
-            class="{{ request()->is('premium') ? 'sidebar-sub-header-active' : 'sidebar-sub-header space-x-1 items-center' }}">
+            class="{{ request()->is('premium') || request()->is('pag-ibig') || request()->is('phil-health') ? 'sidebar-sub-header-active' : 'sidebar-sub-header space-x-1 items-center' }}">
                 <img src="/images/icons/wallet-svgrepo-com.svg" class="h-3">
                 <span>Premiums</span>
             </a>

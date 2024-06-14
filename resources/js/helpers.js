@@ -16,3 +16,17 @@ export function getListCurrentDateWithLessThan(startYear) {
 export function getCurrentDate() {
     return new Date().getFullYear().toString();
 }
+
+export function getCurrentURL(url) {
+    const currentURL = ref('');
+
+    if (url == '/premium') {
+        currentURL.value = 'SSS';
+    } else if (url == '/pag-ibig') {
+        currentURL.value = 'PAG-IBIG';
+    } else {
+        currentURL.value = 'PHIL-HEALTH';
+    }
+
+    return currentURL;
+}
