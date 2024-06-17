@@ -5,7 +5,7 @@
             v-for="(tab, index) in tabs"
             :key="index"
             :class="getTabButtonClasses(tab)"
-            :href="`/${tab.toLowerCase().replace(' ', '-')}`"
+            :href="`/${tab.toLowerCase()}`"
             @click.prevent="changeTab(tab)"
             >
             {{ tab }}
@@ -24,20 +24,21 @@
 
 <script setup>
     import { ref, defineProps, onMounted } from 'vue';
-    import axios from 'axios';
     import { getCurrentURL } from '../helpers';
 
     const activeTab = ref('SSS');
     const tabs = ref([
         'SSS',
         'PHIL-HEALTH',
-        'PAG-IBIG'
+        'PAG-IBIG',
+        'TAX',
     ]);
 
     const props = defineProps({
         url_pag_ibig: String,
         url_premium: String,
         url_phil_health: String,
+        url_tax: String
     })
 
     const getTabButtonClasses = (tab) => {
@@ -56,8 +57,10 @@
             window.location.href = props.url_premium
         } else if (urlTab == 'pag-ibig') {
             window.location.href = props.url_pag_ibig
-        } else {
+        } else if (urlTab == 'phil-health') {
             window.location.href = props.url_phil_health
+        } else {
+            window.location.href = props.url_tax
         }
     }
 
