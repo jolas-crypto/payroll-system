@@ -12,6 +12,7 @@
                 $urlPagIbig=route('pag-ibig.index');
                 $urlPremium=route('premium.index');
                 $urlPhilHealth=route('phil-health.index');
+                $urlTax=route('tax.index');
                 $showEntries = 10;
                 $defaultSortDirection = "desc";
                 $defaultSortField = "year";
@@ -20,6 +21,7 @@
             :url_pag_ibig="{{ json_encode($urlPagIbig) }}"
             :url_premium="{{ json_encode($urlPremium) }}"
             :url_phil_health="{{ json_encode($urlPhilHealth) }}"
+            :url_tax="{{ json_encode($urlTax) }}"
             ></header-body-content>
             <page-premiums-pagibig-list
             :data="{{ json_encode($data) }}"

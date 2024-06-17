@@ -24,8 +24,10 @@ export function getCurrentURL(url) {
         currentURL.value = 'SSS';
     } else if (url == '/pag-ibig') {
         currentURL.value = 'PAG-IBIG';
-    } else {
+    } else if (url == '/phil-health') {
         currentURL.value = 'PHIL-HEALTH';
+    } else {
+        currentURL.value = 'TAX';
     }
 
     return currentURL;

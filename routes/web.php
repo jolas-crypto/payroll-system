@@ -10,6 +10,7 @@ use App\Http\Controllers\Premiums\PagibigController;
 use App\Http\Controllers\Premiums\PhilHealthController;
 use App\Http\Controllers\Premiums\PremiumController;
 use App\Http\Controllers\Premiums\SSSPremiumController;
+use App\Http\Controllers\Premiums\TaxController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function  () {
@@ -33,4 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('phil-health', PhilHealthController::class);
     Route::post('/premium-philhealth/list', [PhilHealthController::class, 'list'])->name('premium-philhealth-list');
+
+    Route::resource('tax', TaxController::class);
+    Route::post('/tax/type/{type}', [TaxController::class, 'getFilterTypeTax'])->name('tax-type');
 });
